@@ -1,5 +1,5 @@
 # 1. Build da app
-FROM node:18 AS build
+FROM node:20-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
@@ -16,5 +16,5 @@ RUN apk add --no-cache gettext
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY public/env-config.js /usr/share/nginx/html/env-config.js
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
